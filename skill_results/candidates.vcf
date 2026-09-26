@@ -1,0 +1,42 @@
+##fileformat=VCFv4.2
+##comment=Candidate somatic mutations of interest for IGV validation (osteosarc.com public data)
+##contig=<ID=chr1>
+##contig=<ID=chr2>
+##contig=<ID=chr3>
+##contig=<ID=chr4>
+##contig=<ID=chr5>
+##contig=<ID=chr6>
+##contig=<ID=chr7>
+##contig=<ID=chr8>
+##contig=<ID=chr9>
+##contig=<ID=chr10>
+##contig=<ID=chr11>
+##contig=<ID=chr12>
+##contig=<ID=chr13>
+##contig=<ID=chr14>
+##contig=<ID=chr15>
+##contig=<ID=chr16>
+##contig=<ID=chr17>
+##contig=<ID=chr18>
+##contig=<ID=chr19>
+##contig=<ID=chr20>
+##contig=<ID=chr21>
+##contig=<ID=chr22>
+##contig=<ID=chrX>
+##INFO=<ID=GENE,Number=1,Type=String,Description="Gene">
+##INFO=<ID=SOURCE,Number=1,Type=String,Description="Why this candidate was chosen">
+##INFO=<ID=SVTYPE,Number=1,Type=String,Description="SV type">
+##INFO=<ID=MATEID,Number=1,Type=String,Description="Mate breakend">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr1	215650752	C10	C	A	.	PASS	GENE=USH2A;SOURCE=T0_(Personalis)_only,_10_alt_reads_in_blood
+chr2	205310103	C4_2	G	G[chr9:22007648[	.	PASS	SVTYPE=BND;MATEID=C4_1;GENE=CDKN2B-PARD3B
+chr2	209694772	C8	GGCTACTGTGTGTTCAATAAGTACACAGT	G	.	PASS	GENE=MAP2;SOURCE=strong_read_counts_all_timepoints,_0_blood,_but_0/6_callers_(complex_indel/align
+chr3	77607853	C3	C	A	.	PASS	GENE=ROBO2;SOURCE=5/6_callers,_absent_T0,_rising_T1->T2
+chr4	1805817	C9	GC	G	.	PASS	GENE=FGFR3;SOURCE=T2_only,_1/6_callers,_GC-rich_region
+chr6	26055824	C1	ACCTTGGGCTTAGCGG	A	.	PASS	GENE=H1-2;SOURCE=6/6_callers,_all_timepoints,_0_blood_reads,_PURPLE_driver
+chr6	117301021	C6	G	T	.	PASS	GENE=ROS1;SOURCE=PURPLE_driver_but_only_1/6_callers,_T1_only
+chr8	102560579	C11	G	T	.	PASS	GENE=ODF1;SOURCE=18/990_alt_reads_in_blood,_0_callers
+chr9	22007648	C4_1	A	]chr2:205310103]A	.	PASS	SVTYPE=BND;MATEID=C4_2;GENE=CDKN2B-PARD3B
+chr19	2214506	C2	G	A	.	PASS	GENE=DOT1L;SOURCE=5/6_callers,_absent_T0,_present_T1+T2_(acquired_later)
+chr22	29049913	C7	G	A	.	PASS	GENE=ZNRF3;SOURCE=PURPLE_TSG_driver,_2/6_callers,_6/126_reads_T1_only
+chrX	77599465	C5	C	T	.	PASS	GENE=ATRX;SOURCE=0/6_WGS_callers,_4/156_alt_reads_T1_only,_site_says_Mutect2-2024_+_BostonGene_WE

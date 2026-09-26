@@ -13,3 +13,7 @@ snapshots_quarantine/
 # rebuilt by make_report.py (images embedded, ~1 MB)
 report/report.html
 .DS_Store
+# skill runs: merged BAM slices and logs stay local
+skill_results/bams/
+skill_results/*.log
+skill_results/reference

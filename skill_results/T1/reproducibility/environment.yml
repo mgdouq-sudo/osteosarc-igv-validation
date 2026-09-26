@@ -1,0 +1,9 @@
+name: clawbio-igv-validator
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - pysam>=0.22
+      - Pillow>=10.1
