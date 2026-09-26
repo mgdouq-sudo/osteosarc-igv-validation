@@ -1,0 +1,15 @@
+# read data: large, and re-downloadable from osteosarc.com
+bams/
+*.bam
+*.bai
+# IGV logs and scratch
+*.log
+validation/one_variant.igv
+validation/rerun_counts.tsv
+# earlier-session screenshots (superseded by snapshots_T1/)
+snapshots/
+snapshots_full/
+snapshots_quarantine/
+# rebuilt by make_report.py (images embedded, ~1 MB)
+report/report.html
+.DS_Store

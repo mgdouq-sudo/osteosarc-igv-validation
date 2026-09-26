@@ -1,0 +1,182 @@
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch1.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch1.bam name=T1_blood
+goto chr6:26055784-26055884
+sort base chr6:26055825
+expand
+goto chr6:26055784-26055884
+snapshot C1_H1-2_T1_chr6-26055824_del15.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr19:2214486-2214526
+sort base chr19:2214506
+expand
+goto chr19:2214486-2214526
+snapshot C2_DOT1L_T1_chr19-2214506_GtoA.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr3:77607833-77607873
+sort base chr3:77607853
+expand
+goto chr3:77607833-77607873
+snapshot C3_ROBO2_T1_chr3-77607853_CtoA.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED true
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr9:22007608-22007688
+sort base chr9:22007648
+expand
+goto chr9:22007608-22007688
+snapshot C4a_CDKN2B_T1_breakpoint_chr9-22007648.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED true
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr2:205310063-205310143
+sort base chr2:205310103
+expand
+goto chr2:205310063-205310143
+snapshot C4b_PARD3B_T1_breakpoint_chr2-205310103.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch1.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch1.bam name=T1_blood
+goto chrX:77599445-77599485
+sort base chrX:77599465
+expand
+goto chrX:77599445-77599485
+snapshot C5_ATRX_T1_chrX-77599465_CtoT.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr6:117301001-117301041
+sort base chr6:117301021
+expand
+goto chr6:117301001-117301041
+snapshot C6_ROS1_T1_chr6-117301021_GtoT.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr22:29049893-29049933
+sort base chr22:29049913
+expand
+goto chr22:29049893-29049933
+snapshot C7_ZNRF3_T1_chr22-29049913_GtoA.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_tumor.batch2.bam name=T1_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr2:209694750-209694830
+sort base chr2:209694780
+expand
+goto chr2:209694750-209694830
+snapshot C8_MAP2_T1_chr2-209694772_del28.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T2_tumor.batch2.bam name=T2_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T1_blood.batch2.bam name=T1_blood
+goto chr4:1805797-1805837
+sort base chr4:1805818
+expand
+goto chr4:1805797-1805837
+snapshot C9_FGFR3_T2_chr4-1805817_delC.png
+genome /Users/mgharandouq/osteosarc_sv/igv/hg38_osteo.json
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T0_tumor.batch2.bam name=T0_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T0_blood.batch2.bam name=T0_blood
+goto chr1:215650732-215650772
+sort base chr1:215650752
+expand
+goto chr1:215650732-215650772
+snapshot C10_USH2A_T0_chr1-215650752_CtoA.png
+new
+setSleepInterval 1500
+snapshotDirectory /Users/mgharandouq/osteosarc_sv/igv/snapshots_T1
+preference SAM.DOWNSAMPLE_READS false
+preference SAM.ALLELE_THRESHOLD 0.02
+preference SAM.SHOW_SOFT_CLIPPED false
+maxPanelHeight 900
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T0_tumor.batch2.bam name=T0_tumor
+load /Users/mgharandouq/osteosarc_sv/igv/bams/T0_blood.batch2.bam name=T0_blood
+goto chr8:102560559-102560599
+sort base chr8:102560579
+expand
+goto chr8:102560559-102560599
+snapshot C11_ODF1_T0_chr8-102560579_GtoT.png
+preference SAM.SHOW_SOFT_CLIPPED false
+exit

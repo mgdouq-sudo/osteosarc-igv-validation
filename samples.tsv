@@ -1,0 +1,5 @@
+T0_tumor	genomics/genomics-bulk/2022.12.16/DNA/2022.12.16.dna.personalis.WGS/aligned_bams/recalibrated/NP_WGS_Tumor_DNA/NP_WGS_Tumor_DNA.recal.bam
+T0_blood	genomics/genomics-bulk/2022.12.16/DNA/2022.12.16.dna.personalis.WGS/aligned_bams/recalibrated/NP_WGS_Normal_DNA/NP_WGS_Normal_DNA.recal.bam
+T1_tumor	genomics_reprocessing/DNA/T1_2024_BAM/preprocessing/recalibrated/tumor/BAM/tumor24.recal.bam
+T1_blood	genomics_reprocessing/DNA/T1_2024_BAM/preprocessing/recalibrated/blood/BAM/blood.recal.bam
+T2_tumor	genomics_reprocessing/DNA/T2_2025_01_BAM/SG.WGS.UCLA.2025.01.tumor.recal.bam

@@ -1,0 +1,13 @@
+shot_id	count_id	gene	label	timepoint	category	verdict	reason
+C1	C1	H1-2	chr6:26,055,824  15 bp in-frame deletion	T1	true	TRUE	The same 15 bp deletion sits in a clean stack of tumor reads at every time point and is absent from blood.
+C2	C2	DOT1L	chr19:2,214,506  G>A  p.Trp611Ter	T1	true	TRUE	Tumor reads carry the A allele on both strands; absent from T0 tumor and from blood, so it arose after T0.
+C3	C3	ROBO2	chr3:77,607,853  C>A  p.Asn1080Lys	T1	true	TRUE	Tumor reads carry the A allele on both strands at T1 and T2; absent from T0 tumor and from blood.
+C4a	C4	CDKN2B-PARD3B	t(2;9) chr9:22,007,648 breakpoint	T1	true	TRUE	Tumor reads stop exactly at the chr9 breakpoint and their clipped ends or mates map to the chr2 partner; none in blood.
+C4b	C4	CDKN2B-PARD3B	t(2;9) chr2:205,310,103 breakpoint	T1	true	TRUE	Partner side of the same translocation. A poly-T run causes some clipping in blood too (noise), but only tumor reads link to chr9.
+C5	C5	ATRX	chrX:77,599,465  C>T  p.Gly1968Arg	T1	not_supported	NOT SUPPORTED	Only 2 reads carry the T allele, at T1 only; too few to separate from sequencing error.
+C6	C6	ROS1	chr6:117,301,021  G>T  p.Ser2223Tyr	T1	artifact	LIKELY ARTIFACT	The site is already a germline G/C SNP in every sample, including blood; the T is a third allele in a few tumor reads.
+C7	C7	ZNRF3	chr22:29,049,913  G>A  p.Gly578Ser	T1	weak	WEAK / UNCLEAR	A handful of A reads at T1 only and none at T2 despite deeper coverage; needs orthogonal confirmation.
+C8	C8	MAP2	chr2:209,694,772  28 bp deletion  p.Leu867fs	T1	true	TRUE	Clean 28 bp deletion with two mismatches just before it (a complex indel), in tumor at every time point and absent from blood.
+C9	C9	FGFR3	chr4:1,805,817  del C  p.Pro573fs	T2	weak	WEAK / LIKELY NOISE	Low-level 1 bp deletion at T2 only, in a GC-rich stretch where sequencing slippage creates false 1 bp deletions. Not seen at T1.
+C10	C10	USH2A	chr1:215,650,752  C>A  p.Cys4728Phe	T0	true	TRUE at T0 only	Clear A allele on both strands in the T0 tumor, absent from T1, T2 and blood: a subclone not seen later. Not seen at T1.
+C11	C11	ODF1	chr8:102,560,579  G>T  p.Val150Leu	T0	artifact	ARTIFACT	Supporting reads carry several clustered mismatches and sit on one strand only; the same pattern appears in T1 blood. Not seen at T1.

@@ -1,0 +1,4 @@
+{ "id": "hg38_osteo2", "name": "Human hg38 (2bit)",
+  "twoBitURL": "https://data.osteosarc.com/hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit",
+  "chromSizesURL": "https://data.osteosarc.com/hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.chrom.sizes",
+  "tracks": [ { "name": "RefSeq Select", "format": "refgene", "url": "https://data.osteosarc.com/hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ncbiRefSeqSelect.txt.gz", "indexed": false } ] }
