@@ -192,6 +192,8 @@ $V --summarize reports/ --curated-calls curated.csv --overview --interactive --r
 | Curated calls | your final table vs IGV, one plain sentence per sample and gene | `--curated-calls` |
 | Images and interactive views | gene overview images, zoomable pages, the gene track | `--overview --interactive --annotation` |
 | Keeping and sharing | the page shows its path; the whole report is zipped next to it and linked as a download | default (`--no-bundle` to skip) |
+| One page that stays current | `summary.html` links every report, image and interactive view; each later check refreshes it | `--project` |
+| Batches | a separate report per batch folder, and an index page listing them all | `--project <batch>`, `--index` |
 | Counts only | no screenshots, e.g. on a compute node | `--no-igv` |
 
 Every mode, with a prompt and a command, and every option are documented in the skill's
