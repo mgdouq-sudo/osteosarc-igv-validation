@@ -1,5 +1,5 @@
-id	gene	kind	variant	filter	sample	depth	alt	vaf_pct	alt_fwd	alt_rev	alt_near_read_end	alt_mean_mapq	split	discordant	flags	status
-C10	USH2A	snv	chr1:215,650,752 C>A	PASS	T0_tumor	40	15	37.5	10	5	3	60				supported
-C10	USH2A	snv	chr1:215,650,752 C>A	PASS	T0_blood	37	0	0.0	0	0	0					supported
-C11	ODF1	snv	chr8:102,560,579 G>T	PASS	T0_tumor	52	5	9.6	0	5	0	60			strand_bias	flagged
-C11	ODF1	snv	chr8:102,560,579 G>T	PASS	T0_blood	41	0	0.0	0	0	0				strand_bias	flagged
+id	gene	kind	variant	filter	sample	depth	alt	vaf_pct	alt_fwd	alt_rev	alt_near_read_end	alt_mean_mapq	split	discordant	caller_alt	caller_depth	flags	status
+C10	USH2A	snv	chr1:215,650,752 C>A	PASS	T0_tumor	40	15	37.5	10	5	3	60						supported
+C10	USH2A	snv	chr1:215,650,752 C>A	PASS	T0_blood	37	0	0.0	0	0	0							supported
+C11	ODF1	snv	chr8:102,560,579 G>T	PASS	T0_tumor	52	5	9.6	0	5	0	60					strand_bias	flagged
+C11	ODF1	snv	chr8:102,560,579 G>T	PASS	T0_blood	41	0	0.0	0	0	0						strand_bias	flagged

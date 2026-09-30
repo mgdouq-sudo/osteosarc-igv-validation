@@ -1,7 +1,7 @@
 {
   "skill": "igv-validator",
   "version": "0.1.0",
-  "completed_at": "2026-09-26T20:15:09.229408+00:00",
+  "completed_at": "2026-09-30T19:38:45.935653+00:00",
   "input_checksum": "sha256:5305d20c00d8595bb304239d35a64175131c05df927d6a4364942f5bd6c1fa94",
   "datasets": {},
   "summary": {
@@ -13,7 +13,10 @@
     "not_evaluated": 0,
     "screenshots_taken": 2,
     "screenshot_note": "",
-    "swap_warning": ""
+    "swap_warning": "",
+    "mode": "tumor_normal",
+    "caller_sample": null,
+    "caller_disagrees": 0
   },
   "data": {
     "variants": [
@@ -53,6 +56,7 @@
           "split": null,
           "discordant": null
         },
+        "caller": null,
         "flags": [],
         "status": "supported",
         "figures": [
@@ -95,6 +99,7 @@
           "split": null,
           "discordant": null
         },
+        "caller": null,
         "flags": [
           "strand_bias"
         ],
@@ -113,17 +118,26 @@
       "SPLIT_WINDOW": 500,
       "PAIR_WINDOW": 1000,
       "MIN_SV_LEN": 1000,
+      "MIN_INV_LEN": 50,
       "MIN_SUPPORT": 3,
       "MIN_VAF": 5.0,
       "STRAND_MIN": 4,
       "READ_END_BP": 10,
       "LOW_DEPTH": 10,
       "GERMLINE_OTHER": 20.0,
+      "CALLER_VAF_DIFF": 10.0,
       "HIGH_DEPTH_X": 2.5
     },
     "samples": {
       "tumor": "T0_tumor",
       "normal": "T0_blood"
+    },
+    "tool": "candidates.vcf",
+    "inputs": {
+      "tumor": "bams_wide/T0_tumor.bam",
+      "normal": "bams_wide/T0_blood.bam",
+      "reference": "reference/Homo_sapiens_assembly38.fasta",
+      "igv": "/Applications/IGV_2.19.7.app"
     }
   }
 }

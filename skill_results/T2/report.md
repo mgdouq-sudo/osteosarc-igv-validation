@@ -1,18 +1,20 @@
 # IGV Validator Report
 
 **Input**: `candidates.vcf` (1 variant(s) checked) · tumor: T2_tumor · normal: T1_blood
-**Date**: 2026-09-26  
+**Date**: 2026-09-30  
 **Skill**: igv-validator 0.1.0
 
 **0 supported, 1 flagged, 0 insufficient**.
+
+> Caller counts: the VCF has no sample columns, so there are no caller counts to compare.
 
 IGV screenshots: 1 image(s) in `figures/igv/`.
 
 Read counts come from the BAMs (MAPQ >= 20, base quality >= 20, duplicate/secondary/supplementary reads removed, each DNA molecule counted once), never from the screenshots. **Status** is a rule-based summary of the flags, not a verdict on whether the variant is real.
 
-| ID | Gene | Variant | Tumor support | Normal support | Flags | Status |
-|---|---|---|---|---|---|---|
-| C9 | FGFR3 | chr4:1,805,817 1 bp deletion | 4/119 (3.4%) | 0/59 (0.0%) | low_vaf | **flagged** |
+| ID | Gene | Variant | Tumor support | Normal support | Caller reported (VCF) | Flags | Status |
+|---|---|---|---|---|---|---|---|
+| C9 | FGFR3 | chr4:1,805,817 1 bp deletion | 4/119 (3.4%) | 0/59 (0.0%) | - | low_vaf | **flagged** |
 
 ## Flags
 
@@ -23,6 +25,7 @@ Read counts come from the BAMs (MAPQ >= 20, base quality >= 20, duplicate/second
 - `read_end`: alt bases mostly within 10 bp of read ends
 - `low_depth`: under 10 reads in tumor or normal
 - `germline_site`: the normal carries another allele here (>= 20% of reads)
+- `caller_disagrees`: the caller's reported counts (VCF AD) differ from the BAM by over 10 VAF points
 - `no_coverage`: no reads at this position in either BAM (region not in the BAM, or wrong BAM/contig)
 - `high_depth`: depth over 2.5x the median of this run (possible repeat or mismapped reads)
 
@@ -32,6 +35,7 @@ Read counts come from the BAMs (MAPQ >= 20, base quality >= 20, duplicate/second
 
 - T2_tumor: 4/119 (3.4%), 3 forward / 1 reverse
 - T1_blood: 0/59 (0.0%)
+- Caller reported (VCF): -
 - Flags: under 5% of reads
 
 ![C9 IGV](figures/igv/C9_FGFR3.png)

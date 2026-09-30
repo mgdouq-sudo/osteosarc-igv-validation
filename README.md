@@ -2,11 +2,27 @@
 
 Do the reads support the mutations the variant callers report? This repo checks 11 candidate
 somatic mutations from a publicly shared osteosarcoma genome against the sequencing reads.
-For each one it counts tumor and blood reads straight from the BAM files and shows the reads
-in IGV, one tumor-over-blood screenshot per mutation.
+For each one it counts tumor and blood reads straight from the BAM files, shows the reads in IGV,
+and puts everything on one summary page with zoomable, clickable views.
 
 The checks were run with **[igv-validator](https://github.com/mgdouq-sudo/ClawBio/tree/feat/igv-validator/skills/igv-validator)**,
 a [ClawBio](https://github.com/ClawBio/ClawBio) skill built from the prototype pipeline in this repo.
+
+## What igv-validator is for (and what it isn't)
+
+**1. Faster review and reporting.** Instead of opening IGV, loading BAMs and navigating to each gene for every
+sample, one run gives a page covering all samples and genes: IGV screenshots, the gene drawn underneath,
+zoomable interactive views and a plain sentence per call. It is reproducible, and a collaborator or PI can
+review the evidence without using IGV.
+
+**2. Catching errors in calls and pipelines.** Reads are counted straight from the BAM and set against what the
+callers (and your curated table) say, so disagreements stand out: single-strand artifacts, sites where the
+normal already carries another allele, too few reads, copy-number calls the read depth does not show, and
+calls caused by how the reads were aligned (see [Why alignment settings matter](#why-alignment-settings-matter)).
+
+**What it isn't:** a variant caller or an automatic truth. Copy number from read depth is a simple measure,
+tumor-only data cannot separate inherited from somatic variants, and every verdict is a first pass. The
+screenshots and interactive views are the evidence: judge each result there before reporting it.
 
 ## Data
 
@@ -19,8 +35,10 @@ Whole-genome sequencing shared publicly by the patient at [osteosarc.com](https:
 | T1 tumor + blood | Jun 2024 | UCLA |
 | T2 tumor (compared with T1 blood; no T2 blood sample) | Jan 2025 | UCLA |
 
-No reads are stored here. `samples.tsv` lists the source BAMs; only small slices around each
-mutation were downloaded. Reference: Broad `Homo_sapiens_assembly38.fasta`, the build the BAMs were aligned to.
+No BAM files are stored here. `samples.tsv` lists the source BAMs, and `skill_results/make_wide_slices.py`
+downloads ±5 kb slices around each mutation. The interactive pages in `skill_results/interactive/` embed the
+reads of those slices, from this openly shared genome. Reference: Broad `Homo_sapiens_assembly38.fasta`, the
+build the BAMs were aligned to.
 
 ## Results
 
@@ -42,16 +60,36 @@ Each mutation is shown at T1 unless it was only called at another time point.
 
 **Six mutations are well supported, three look like artifacts or noise, one is weak and one has too few reads.**
 Read counts come from the BAMs (mapping quality ≥ 20, base quality ≥ 20, duplicates removed, each DNA
-molecule counted once), never from the screenshots.
+molecule counted once), never from the screenshots. Re-running with the current version of the skill gave
+identical counts.
 
 The skill's automatic status agrees with the manual review for 10 of 11. The exception is ZNRF3: it
 just clears the thresholds at T1 (3 reads, 5.3%), but manual review also saw that it is absent at T2
 despite deeper coverage. The skill checks one tumor/normal pair at a time, which is why its status is a
 summary of the flags and not a verdict.
 
+### The summary page
+
+`skill_results/summary.html` lists the 11 candidates (as `curated_calls.csv`) against the reads: what the
+call was, what IGV shows in one sentence, whether they agree, a thumbnail of the gene with the call marked, and
+links to the full report, the overview image and the interactive view. Flagged calls come first, with the
+reason in plain words.
+
+![Summary page](docs/summary_page.png)
+
+### Interactive views
+
+Each sample and gene also has a page (`skill_results/interactive/`, built with
+[igv-reports](https://github.com/igvteam/igv-reports)) where you can zoom, scroll and click a read to see its
+bases, mapping quality and mate. The pages open offline in any browser after cloning; GitHub shows them only
+as source.
+
+![Interactive view of DOT1L](docs/interactive_DOT1L.png)
+
 ### Examples
 
-**DOT1L, a clear somatic mutation:** 12 tumor reads carry the A, on both strands; none in blood.
+**DOT1L, a clear somatic mutation:** 12 tumor reads carry the A, on both strands; none in blood. The gene
+track underneath shows the codon it hits: the W (tryptophan, TGG) becomes TGA, a stop codon (p.Trp611Ter).
 
 ![DOT1L](skill_results/T1/figures/igv/C2_DOT1L.png)
 
@@ -60,7 +98,104 @@ positions, a misalignment or damage pattern. It is absent from blood and from la
 
 ![ODF1](skill_results/T0/figures/igv/C11_ODF1.png)
 
-The other screenshots are in `skill_results/T1`, `T0` and `T2` (each with a full `report.md`).
+The other screenshots are in `skill_results/T1`, `T0` and `T2` (each with a full `report.md` and `report.html`).
+
+## Why alignment settings matter
+
+GRCh38 contains extra copies of a few highly variable regions, the *alternate-haplotype (alt) contigs*; the
+MHC on chromosome 6 has seven. Genes there, such as DAXX at the edge of the MHC, match both chr6 and several
+alt contigs. An aligner that knows the alt contigs are alternative versions of chr6 (BWA with its `.alt` file,
+"alt-aware") keeps those reads on chr6 with good mapping quality. Without that file, the same reads fit
+several places equally well, get mapping quality 0, and any caller that filters on mapping quality sees no
+coverage and can report a false homozygous deletion.
+
+This genome was aligned with BWA against the GATK GRCh38 bundle (nf-core/sarek), and its reads behave as
+alt-aware alignment should:
+
+| DAXX (chr6:33,318,558-33,323,010) | T1 tumor | T1 blood |
+|---|---|---|
+| Reads starting in the gene | 2,807 | 2,034 |
+| Mapping quality ≥ 20 | 2,807 (100%) | 2,034 (100%) |
+| Reads that also match MHC alt contigs (GL000251/252/254/255v2_alt) | 2,794 | 2,019 |
+
+Almost every DAXX read also matches four alt contigs, yet all keep a good mapping quality. In a BAM aligned
+against the same reference without the `.alt` file, those reads would have mapping quality 0.
+igv-validator flags that case as `ambiguous_mapping`: the reads are there (IGV draws them hollow), and the
+"deletion" comes from the alignment, not the tumor. Its synthetic demo reproduces it (`--demo-cnv`, gene
+ALTGENE). To check your own BAMs: `samtools view -H your.bam | grep '^@PG'` shows the aligner command.
+
+<details><summary>Reproduce the table (public BAM; saves its 9 MB index in the current folder)</summary>
+
+```python
+import collections, pysam
+url = ("https://sid-sijbrandij-osteosarc-dataset.s3.us-west-2.amazonaws.com/"
+       "genomics_reprocessing/DNA/T1_2024_BAM/preprocessing/recalibrated/tumor/BAM/tumor24.recal.bam")
+bam = pysam.AlignmentFile(url)          # fetches the .bai next to it
+mq, alt = collections.Counter(), 0
+for r in bam.fetch("chr6", 33318557, 33323010):
+    if r.is_duplicate or r.is_secondary or r.is_supplementary or not 33318558 <= r.reference_start + 1 <= 33323010:
+        continue
+    mq[r.mapping_quality >= 20] += 1
+    alt += r.has_tag("XA") and "_alt," in r.get_tag("XA")
+print(dict(mq), alt)
+```
+</details>
+
+## Running igv-validator yourself
+
+### With Claude Code (or another agent with ClawBio)
+
+Describe what you want; Claude reads the skill, builds the commands, runs them and explains the results.
+Examples (replace names and paths with yours):
+
+- *"Use igv-validator on samples S1 and S2 for KRAS, BRAF and PTEN. The BAMs, Mutect2, SURVIVOR and GATK
+  outputs are under `<results folder>`. Tumor-only. Compare with my curated calls in `<table.csv>`."*
+- *"Check the calls in `calls.vcf` against `tumor.bam` and `normal.bam` and take IGV screenshots."*
+- *"Do the GATK copy-number calls for sample S1 match the read depth in PTEN?"*
+- *"Summarize all runs in `reports/` with overview images and interactive views, and make a light download
+  for my PI."*
+- *"Run the igv-validator demo."*
+
+Claude asks for anything missing (file locations, the reference, tumor-only or paired).
+
+### Without Claude Code
+
+Inputs: an indexed tumor BAM (and optionally the normal), the reference FASTA the BAMs were aligned to, the
+callers' outputs (VCF for SNVs/indels/SVs, a segment file for copy number), a BED of your genes, and
+optionally a curated table (`sample, gene, alteration`) and a GENCODE GTF for the gene track.
+
+```bash
+git clone -b feat/igv-validator https://github.com/mgdouq-sudo/ClawBio.git && cd ClawBio && pip install -e .
+V="python skills/igv-validator/igv_validator.py"
+
+$V --demo --output /tmp/igv_demo                                   # try it: synthetic data, no files needed
+
+# per sample: SNVs/indels, SVs and copy number (leave out --normal for tumor-only)
+$V --vcf S1.mutect2.vcf --tumor S1.bam --normal S1_normal.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/snv
+$V --vcf S1.sv.vcf --tumor S1.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/sv
+$V --cnv S1.called.seg --cnv-sample S1 --tumor S1.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/cnv
+
+# all samples on one page, compared with your curated calls, with images and interactive views
+$V --summarize reports/ --curated-calls curated.csv --overview --interactive --regions my_genes.bed \
+   --annotation gencode.v44.basic.annotation.gtf.gz --bundle light
+```
+
+### The modes
+
+| Mode | What it does | Main options |
+|---|---|---|
+| Variant check, tumor + normal | read support in tumor and normal, caller comparison, artifact flags, one screenshot per call | `--vcf --tumor --normal` |
+| Variant check, tumor-only | the same without a normal (normal-based checks skipped; cannot tell somatic from inherited) | `--vcf --tumor` |
+| Structural variants | split reads and discordant pairs at both breakends; selected by gene coordinates | `--vcf --regions` |
+| Copy number | segment calls vs read depth per gene; depth steps, ambiguous mapping, depth plots | `--cnv --regions` |
+| Summary | one page over many samples and runs: raw calls vs the reads | `--summarize` |
+| Curated calls | your final table vs IGV, one plain sentence per sample and gene | `--curated-calls` |
+| Images and interactive views | gene overview images, zoomable pages, the gene track | `--overview --interactive --annotation` |
+| Sharing | page location, print to PDF, light (no reads) or full downloads | `--bundle` |
+| Counts only | no screenshots, e.g. on a compute node | `--no-igv` |
+
+Every mode, with a prompt and a command, and every option are documented in the skill's
+[SKILL.md](https://github.com/mgdouq-sudo/ClawBio/blob/feat/igv-validator/skills/igv-validator/SKILL.md).
 
 ## Validation of the counting
 
@@ -80,7 +215,12 @@ This caught one real bug: overlapping read pairs were counted twice for indels (
 
 | Path | What it is |
 |---|---|
-| `skill_results/` | The igv-validator runs: `candidates.vcf` (the 11 mutations), per-time-point variant lists, and a report, screenshots, counts table and reproducibility bundle for T1, T0 and T2 |
+| `skill_results/summary.html` | The summary page (open it in a browser after cloning) |
+| `skill_results/T1`, `T0`, `T2` | Per time point: report, screenshots, counts table and reproducibility bundle |
+| `skill_results/overview/`, `interactive/` | Gene overview images; interactive pages per sample and gene (embed reads) |
+| `skill_results/candidates.vcf`, `*_variants.tsv`, `curated_calls.csv`, `showcase_genes.bed` | The 11 mutations, which to check at each time point, the curated list and the gene windows |
+| `skill_results/make_wide_slices.py`, `run_showcase.sh` | Download the BAM slices; re-run everything |
+| `docs/` | Screenshots used in this README |
 | `validation/` | The five validation checks and their results |
 | `igv_validation_results.tsv` | Manual review verdicts from the first pass |
 | `count_support.py`, `batch_T1.igv`, `caption_snapshots.py`, `make_report.py`, `run_validation.sh`, `verdicts.tsv` | The original prototype pipeline, kept for reference |
@@ -88,7 +228,8 @@ This caught one real bug: overlapping read pairs were counted twice for indels (
 
 ## Reproduce
 
-Install the skill from the ClawBio fork, download the BAM slices listed in `samples.tsv` and the
-Broad hg38 FASTA, then run the command in `skill_results/<time point>/reproducibility/commands.sh`.
+Install the skill from the ClawBio fork (above) and `pip install igv-reports`, download the BAM indexes listed
+in `samples.tsv` into `bams/`, the Broad hg38 FASTA into `skill_results/reference/` and the GENCODE v44 basic
+GTF, then in `skill_results/` run `python make_wide_slices.py` and `bash run_showcase.sh`.
 
 *This is a research and educational analysis, not a clinical test. It does not provide diagnoses.*

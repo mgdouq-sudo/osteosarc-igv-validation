@@ -1,17 +1,17 @@
-id	gene	kind	variant	filter	sample	depth	alt	vaf_pct	alt_fwd	alt_rev	alt_near_read_end	alt_mean_mapq	split	discordant	flags	status
-C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_tumor	84	18	21.4					12	6		supported
-C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_blood	62	0	0.0					0	0		supported
-C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_tumor	85	29	34.1	8	21	0	60				supported
-C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_blood	70	0	0.0	0	0	0					supported
-C3	ROBO2	snv	chr3:77,607,853 C>A	PASS	T1_tumor	124	13	10.5	5	8	1	60				supported
-C3	ROBO2	snv	chr3:77,607,853 C>A	PASS	T1_blood	50	0	0.0	0	0	0					supported
-C1	H1-2	deletion	chr6:26,055,824 15 bp deletion	PASS	T1_tumor	108	9	8.3	5	4	0	60				supported
-C1	H1-2	deletion	chr6:26,055,824 15 bp deletion	PASS	T1_blood	57	0	0.0	0	0	0					supported
-C6	ROS1	snv	chr6:117,301,021 G>T	PASS	T1_tumor	94	6	6.4	3	3	2	60			germline_site	flagged
-C6	ROS1	snv	chr6:117,301,021 G>T	PASS	T1_blood	64	0	0.0	0	0	0				germline_site	flagged
-C2	DOT1L	snv	chr19:2,214,506 G>A	PASS	T1_tumor	62	12	19.4	6	6	3	60				supported
-C2	DOT1L	snv	chr19:2,214,506 G>A	PASS	T1_blood	48	0	0.0	0	0	0					supported
-C7	ZNRF3	snv	chr22:29,049,913 G>A	PASS	T1_tumor	57	3	5.3	1	2	0	60				supported
-C7	ZNRF3	snv	chr22:29,049,913 G>A	PASS	T1_blood	57	0	0.0	0	0	0					supported
-C5	ATRX	snv	chrX:77,599,465 C>T	PASS	T1_tumor	66	2	3.0	1	1	0	60			low_support;low_vaf	insufficient
-C5	ATRX	snv	chrX:77,599,465 C>T	PASS	T1_blood	30	0	0.0	0	0	0				low_support;low_vaf	insufficient
+id	gene	kind	variant	filter	sample	depth	alt	vaf_pct	alt_fwd	alt_rev	alt_near_read_end	alt_mean_mapq	split	discordant	caller_alt	caller_depth	flags	status
+C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_tumor	84	18	21.4					12	6				supported
+C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_blood	62	0	0.0					0	0				supported
+C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_tumor	85	29	34.1	8	21	0	60						supported
+C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_blood	70	0	0.0	0	0	0							supported
+C3	ROBO2	snv	chr3:77,607,853 C>A	PASS	T1_tumor	124	13	10.5	5	8	1	60						supported
+C3	ROBO2	snv	chr3:77,607,853 C>A	PASS	T1_blood	50	0	0.0	0	0	0							supported
+C1	H1-2	deletion	chr6:26,055,824 15 bp deletion	PASS	T1_tumor	108	9	8.3	5	4	0	60						supported
+C1	H1-2	deletion	chr6:26,055,824 15 bp deletion	PASS	T1_blood	57	0	0.0	0	0	0							supported
+C6	ROS1	snv	chr6:117,301,021 G>T	PASS	T1_tumor	94	6	6.4	3	3	2	60					germline_site	flagged
+C6	ROS1	snv	chr6:117,301,021 G>T	PASS	T1_blood	64	0	0.0	0	0	0						germline_site	flagged
+C2	DOT1L	snv	chr19:2,214,506 G>A	PASS	T1_tumor	62	12	19.4	6	6	3	60						supported
+C2	DOT1L	snv	chr19:2,214,506 G>A	PASS	T1_blood	48	0	0.0	0	0	0							supported
+C7	ZNRF3	snv	chr22:29,049,913 G>A	PASS	T1_tumor	57	3	5.3	1	2	0	60						supported
+C7	ZNRF3	snv	chr22:29,049,913 G>A	PASS	T1_blood	57	0	0.0	0	0	0							supported
+C5	ATRX	snv	chrX:77,599,465 C>T	PASS	T1_tumor	66	2	3.0	1	1	0	60					low_support;low_vaf	insufficient
+C5	ATRX	snv	chrX:77,599,465 C>T	PASS	T1_blood	30	0	0.0	0	0	0						low_support;low_vaf	insufficient
