@@ -152,8 +152,8 @@ Examples (replace names and paths with yours):
   outputs are under `<results folder>`. Tumor-only. Compare with my curated calls in `<table.csv>`."*
 - *"Check the calls in `calls.vcf` against `tumor.bam` and `normal.bam` and take IGV screenshots."*
 - *"Do the GATK copy-number calls for sample S1 match the read depth in PTEN?"*
-- *"Summarize all runs in `reports/` with overview images and interactive views, and make a light download
-  for my PI."*
+- *"Summarize all runs in `reports/` with overview images and interactive views, and give me the download
+  of the whole report."*
 - *"Run the igv-validator demo."*
 
 Claude asks for anything missing (file locations, the reference, tumor-only or paired).
@@ -177,7 +177,7 @@ $V --cnv S1.called.seg --cnv-sample S1 --tumor S1.bam --reference hg38.fa --regi
 
 # all samples on one page, compared with your curated calls, with images and interactive views
 $V --summarize reports/ --curated-calls curated.csv --overview --interactive --regions my_genes.bed \
-   --annotation gencode.v44.basic.annotation.gtf.gz --bundle light
+   --annotation gencode.v44.basic.annotation.gtf.gz        # also zips the whole report: igv_validation_full.zip
 ```
 
 ### The modes
@@ -191,7 +191,7 @@ $V --summarize reports/ --curated-calls curated.csv --overview --interactive --r
 | Summary | one page over many samples and runs: raw calls vs the reads | `--summarize` |
 | Curated calls | your final table vs IGV, one plain sentence per sample and gene | `--curated-calls` |
 | Images and interactive views | gene overview images, zoomable pages, the gene track | `--overview --interactive --annotation` |
-| Sharing | page location, print to PDF, light (no reads) or full downloads | `--bundle` |
+| Keeping and sharing | the page shows its path; the whole report is zipped next to it and linked as a download | default (`--no-bundle` to skip) |
 | Counts only | no screenshots, e.g. on a compute node | `--no-igv` |
 
 Every mode, with a prompt and a command, and every option are documented in the skill's
