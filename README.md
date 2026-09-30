@@ -170,14 +170,11 @@ V="python skills/igv-validator/igv_validator.py"
 
 $V --demo --output /tmp/igv_demo                                   # try it: synthetic data, no files needed
 
-# per sample: SNVs/indels, SVs and copy number (leave out --normal for tumor-only)
-$V --vcf S1.mutect2.vcf --tumor S1.bam --normal S1_normal.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/snv
-$V --vcf S1.sv.vcf --tumor S1.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/sv
-$V --cnv S1.called.seg --cnv-sample S1 --tumor S1.bam --reference hg38.fa --regions my_genes.bed --output reports/S1/cnv
-
-# all samples on one page, compared with your curated calls, with images and interactive views
-$V --summarize reports/ --curated-calls curated.csv --overview --interactive --regions my_genes.bed \
-   --annotation gencode.v44.basic.annotation.gtf.gz        # also zips the whole report: igv_validation_full.zip
+# a whole run in one command: list your samples once (sample, tumor, normal, snv_vcf, sv_vcf, cnv, ...),
+# and each run goes into a new dated folder, igv_reports/<date_time>/, with its summary.html; nothing is overwritten
+$V --samplesheet samples.csv --regions my_genes.bed --reference hg38.fa \
+   --curated-calls curated.csv --annotation gencode.v44.basic.annotation.gtf.gz
+# -> igv_reports/2026-10-20_14-32/summary.html (this run) and igv_reports/index.html (all runs)
 ```
 
 ### The modes
@@ -193,7 +190,7 @@ $V --summarize reports/ --curated-calls curated.csv --overview --interactive --r
 | Images and interactive views | gene overview images, zoomable pages, the gene track | `--overview --interactive --annotation` |
 | Keeping and sharing | the page shows its path; the whole report is zipped next to it and linked as a download | default (`--no-bundle` to skip) |
 | One page that stays current | `summary.html` links every report, image and interactive view; each later check refreshes it | `--project` |
-| Batches | a separate report per batch folder, and an index page listing them all | `--project <batch>`, `--index` |
+| One command per run | every check for every sample from a samplesheet, into a new dated folder with its summary; an index lists all runs | `--samplesheet` |
 | Counts only | no screenshots, e.g. on a compute node | `--no-igv` |
 
 Every mode, with a prompt and a command, and every option are documented in the skill's
