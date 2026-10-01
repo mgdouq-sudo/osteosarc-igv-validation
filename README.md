@@ -215,6 +215,17 @@ python ClawBio/skills/igv-validator/igv_validator.py \
 holds `igv_validation_full.zip` (the whole report, to share), `genes.bed` (the coordinates used), `run_log.tsv`
 and a copy of `samples.csv`.
 
+**Next run, other samples or genes**: edit `samples.csv` (or point `--samplesheet` at a new one), change the
+genes if needed, and run the script again. The new run gets its own dated folder; earlier runs stay as they are.
+The genes come from, in order of priority:
+- `--regions genes.bed`: your own coordinates.
+- `--genes KRAS,BRAF,PTEN`, or `--genes genes.txt` (one name per line).
+- Otherwise, the genes of `--curated-calls`.
+
+Without a curated table, drop `--curated-calls` and give `--genes`. The summary then lists the raw caller calls
+vs IGV. Curated rows for samples outside the run are listed as not compared, and new samples without curated rows
+appear only under the raw calls.
+
 ### The modes
 
 | Mode | What it does | Main options |
