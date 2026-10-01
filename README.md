@@ -185,19 +185,21 @@ python skills/igv-validator/igv_validator.py --demo --output /tmp/igv_demo
 `cnv_sample` = the sample's name inside a multi-sample copy-number file):
 ```
 sample,tumor,normal,snv_vcf,snv_list,sv_vcf,cnv,cnv_sample
-S1,/data/bams/S1.bam,,/data/vcf/S1.mutect2.vcf,,/data/vcf/S1.survivor.vcf,/data/cnv/S1.called.seg,
-S2,/data/bams/S2.bam,/data/bams/S2_normal.bam,/data/vcf/S2.mutect2.vcf,,,/data/cnv/S2.called.seg,
+S1,/data/bams/S1.bam,,/data/vcf/S1.mutect2.vcf,/data/filtered/S1.snvs.tsv,/data/vcf/S1.survivor.vcf,/data/cnv/S1.called.seg,
+S2,/data/bams/S2.bam,/data/bams/S2_normal.bam,/data/vcf/S2.mutect2.vcf,/data/filtered/S2.snvs.tsv,,/data/cnv/S2.called.seg,
 ```
 When file names follow a pattern, a loop writes it:
 ```bash
 echo "sample,tumor,normal,snv_vcf,snv_list,sv_vcf,cnv,cnv_sample" > samples.csv
 for s in S1 S2; do
-  echo "$s,/data/bams/$s.bam,,/data/vcf/$s.mutect2.vcf,,/data/vcf/$s.survivor.vcf,/data/cnv/$s.called.seg," >> samples.csv
+  echo "$s,/data/bams/$s.bam,,/data/vcf/$s.mutect2.vcf,/data/filtered/$s.snvs.tsv,/data/vcf/$s.survivor.vcf,/data/cnv/$s.called.seg," >> samples.csv
 done
 ```
 `sample` must match the curated table's sample names exactly.
-`snv_list` (a table with chrom and pos columns) = **the filtered SNVs your curated table was made from**. Fill it
-in when you compare with curated calls. Without it, every caller SNV in the genes is checked: in tumor-only data
+`snv_list` (a table with chrom and pos columns, `chr`/`start` also work) = **the filtered SNVs your curated table
+was made from**, the same file your analysis reads, not a hand-picked subset. It can cover the whole genome: only
+variants inside the genes are checked. Each listed variant must also be in `snv_vcf`, which supplies the caller's
+read counts; one missing from the VCF is not checked. Fill it in when you compare with curated calls. Without it, every caller SNV in the genes is checked: in tumor-only data
 these are mostly inherited, so the run warns, and they are listed under *details* without counting against a
 curated call.
 
