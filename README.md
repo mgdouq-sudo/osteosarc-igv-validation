@@ -143,41 +143,77 @@ print(dict(mq), alt)
 
 ## Running igv-validator yourself
 
+### What you need
+
+| File | Required? | Notes |
+|---|---|---|
+| Tumor BAM (+ `.bai`) | yes | the normal BAM too if you have one (otherwise tumor-only) |
+| Reference FASTA (+ `.fai`) | yes | the exact FASTA the BAMs were aligned to (check: the `@SQ` lines of the BAM match the `.fai`) |
+| Caller outputs | at least one | SNV/indel VCF (e.g. Mutect2), SV VCF (e.g. SURVIVOR, Manta), copy-number segments (e.g. GATK `called.seg`) |
+| GENCODE GTF | yes, for gene names | `gencode.v44.basic.annotation.gtf.gz` ([download](https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_44/)): where each gene is, and the gene track |
+| Curated calls | optional | CSV/TSV with `sample, gene, alteration` (WT, SNV, SV, SNV+SV, DEL, AMP, LOH): your filtered, reviewed table |
+| `samples.csv` | for one-command runs | one row per sample with the paths above (see below) |
+| IGV desktop ≥ 2.16 | for screenshots | `module load igv` on an HPC, from a desktop session; `--no-igv` skips screenshots |
+| igv-reports | for interactive pages | `pip install igv-reports` |
+
+No BED file is needed: the genes are the curated table's by default, or `--genes A,B`, looked up in GENCODE.
+A gene or sample name that does not match stops the run before anything runs, with a suggestion.
+
 ### With Claude Code (or another agent with ClawBio)
 
-Describe what you want; Claude reads the skill, builds the commands, runs them and explains the results.
-Examples (replace names and paths with yours):
+Describe what you want; Claude reads the skill, finds or asks for the files, writes `samples.csv`, runs it and
+explains the results. Examples (replace names and paths with yours):
 
-- *"Use igv-validator on samples S1 and S2 for KRAS, BRAF and PTEN. The BAMs, Mutect2, SURVIVOR and GATK
-  outputs are under `<results folder>`. Tumor-only. Compare with my curated calls in `<table.csv>`."*
+- *"Use igv-validator on samples S1 and S2. The BAMs, Mutect2, SURVIVOR and GATK outputs are under
+  `<results folder>`, the reference is `<hg38.fa>`. Tumor-only. Compare with my curated calls in `<table.csv>`."*
+- *"Same, but only for KRAS, BRAF and PTEN."*
 - *"Check the calls in `calls.vcf` against `tumor.bam` and `normal.bam` and take IGV screenshots."*
 - *"Do the GATK copy-number calls for sample S1 match the read depth in PTEN?"*
-- *"Summarize all runs in `reports/` with overview images and interactive views, and give me the download
-  of the whole report."*
 - *"Run the igv-validator demo."*
 
 Claude asks for anything missing (file locations, the reference, tumor-only or paired).
 
 ### Without Claude Code
 
-Inputs: an indexed tumor BAM (and optionally the normal), the reference FASTA the BAMs were aligned to, the
-callers' outputs (VCF for SNVs/indels/SVs, a segment file for copy number), a GENCODE GTF (gene positions and
-the gene track) and optionally a curated table (`sample, gene, alteration`). The genes to check are the curated
-table's by default, or `--genes A,B` (or `--regions genes.bed`); unknown gene names or mistyped sample names stop
-the run with a suggestion.
-
+**1. Install** and try the demo (synthetic data, no files needed):
 ```bash
 git clone -b feat/igv-validator https://github.com/mgdouq-sudo/ClawBio.git && cd ClawBio && pip install -e .
-V="python skills/igv-validator/igv_validator.py"
-
-$V --demo --output /tmp/igv_demo                                   # try it: synthetic data, no files needed
-
-# a whole run in one command: list your samples once (sample, tumor, normal, snv_vcf, sv_vcf, cnv, ...),
-# and each run goes into a new dated folder, igv_reports/<date_time>/, with its summary.html; nothing is overwritten
-$V --samplesheet samples.csv --reference hg38.fa \
-   --curated-calls curated.csv --annotation gencode.v44.basic.annotation.gtf.gz   # [--genes KRAS,BRAF]
-# -> igv_reports/2026-10-20_14-32/summary.html (this run) and igv_reports/index.html (all runs)
+python skills/igv-validator/igv_validator.py --demo --output /tmp/igv_demo
 ```
+
+**2. Write `samples.csv`** once, one row per sample (empty cell = skip that check; `normal` empty = tumor-only;
+`cnv_sample` = the sample's name inside a multi-sample copy-number file):
+```
+sample,tumor,normal,snv_vcf,snv_list,sv_vcf,cnv,cnv_sample
+S1,/data/bams/S1.bam,,/data/vcf/S1.mutect2.vcf,,/data/vcf/S1.survivor.vcf,/data/cnv/S1.called.seg,
+S2,/data/bams/S2.bam,/data/bams/S2_normal.bam,/data/vcf/S2.mutect2.vcf,,,/data/cnv/S2.called.seg,
+```
+When file names follow a pattern, a loop writes it:
+```bash
+echo "sample,tumor,normal,snv_vcf,snv_list,sv_vcf,cnv,cnv_sample" > samples.csv
+for s in S1 S2; do
+  echo "$s,/data/bams/$s.bam,,/data/vcf/$s.mutect2.vcf,,/data/vcf/$s.survivor.vcf,/data/cnv/$s.called.seg," >> samples.csv
+done
+```
+`sample` must match the curated table's sample names exactly.
+
+**3. Keep the command in a script** next to `samples.csv` (it starts in its own folder, so anyone can run a copy):
+```bash
+#!/bin/bash
+# IGV validation: each run = one new dated folder in igv_reports/ (never overwrites)
+cd "$(dirname "$0")"
+python ClawBio/skills/igv-validator/igv_validator.py \
+  --samplesheet samples.csv \
+  --reference /path/to/hg38.fa \
+  --curated-calls curated.csv \
+  --annotation gencode.v44.basic.annotation.gtf.gz
+  # to check fewer genes, end the line above with \ and add:  --genes KRAS,BRAF
+```
+
+**4. Run** `bash run_igv_validation.sh` and open what it prints:
+`igv_reports/<date_time>/summary.html` (this run) and `igv_reports/index.html` (every run). The run folder also
+holds `igv_validation_full.zip` (the whole report, to share), `genes.bed` (the coordinates used), `run_log.tsv`
+and a copy of `samples.csv`.
 
 ### The modes
 
