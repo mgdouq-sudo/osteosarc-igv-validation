@@ -221,6 +221,14 @@ python ClawBio/skills/igv-validator/igv_validator.py \
 holds `igv_validation_full.zip` (the whole report, to share), `genes.bed` (the coordinates used), `run_log.tsv`
 and a copy of `samples.csv`.
 
+**Fewer genes for one run**: put them after the script name (the script's last line, `"$@"`, passes them on):
+```bash
+bash run_igv_validation.sh --genes KRAS,BRAF,PTEN
+```
+- `bash run_igv_validation.sh` checks every gene in your curated table.
+- `bash run_igv_validation.sh --genes ...` checks only the genes you list (curated rows for other genes are left
+  out of that run). The script itself does not change.
+
 On the summary, each row gives what IGV shows in one plain sentence (numbers under *details*), a thumbnail, and
 links: *report* opens that check's report showing only that gene (*show all genes* brings back the rest),
 *overview* the gene image, *interactive* the zoomable view. The top table compares your curated calls; the folded
@@ -229,12 +237,12 @@ links: *report* opens that check's report showing only that gene (*show all gene
 **Next run, other samples or genes: edit and run.**
 1. **Samples**: edit `samples.csv` (add or remove rows), or make a new file, e.g. `samples_batch2.csv`, and point
    the script's `--samplesheet` line at it.
-2. **Genes**: add them to your curated table, or set them in the script with `--genes` (below).
+2. **Genes**: add them to your curated table, or list them when you run: `bash run_igv_validation.sh --genes A,B`.
 3. **Run** `bash run_igv_validation.sh`. The run gets its own dated folder; earlier runs stay as they are, and
    `igv_reports/index.html` lists all of them.
 
-**Without a curated table**, remove the `--curated-calls` line and give the genes with `--genes`, either typed in
-the script:
+**Without a curated table**, remove the `--curated-calls` line and give the genes with `--genes`, either when you
+run (`bash run_igv_validation.sh --genes KRAS,BRAF,PTEN`) or typed in the script:
 ```
   --genes KRAS,BRAF,PTEN
 ```
