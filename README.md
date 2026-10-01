@@ -215,16 +215,35 @@ python ClawBio/skills/igv-validator/igv_validator.py \
 holds `igv_validation_full.zip` (the whole report, to share), `genes.bed` (the coordinates used), `run_log.tsv`
 and a copy of `samples.csv`.
 
-**Next run, other samples or genes**: edit `samples.csv` (or point `--samplesheet` at a new one), change the
-genes if needed, and run the script again. The new run gets its own dated folder; earlier runs stay as they are.
-The genes come from, in order of priority:
-- `--regions genes.bed`: your own coordinates.
-- `--genes KRAS,BRAF,PTEN`, or `--genes genes.txt` (one name per line).
-- Otherwise, the genes of `--curated-calls`.
+**Next run, other samples or genes: edit and run.**
+1. **Samples**: edit `samples.csv` (add or remove rows), or make a new file, e.g. `samples_batch2.csv`, and point
+   the script's `--samplesheet` line at it.
+2. **Genes**: add them to your curated table, or set them in the script with `--genes` (below).
+3. **Run** `bash run_igv_validation.sh`. The run gets its own dated folder; earlier runs stay as they are, and
+   `igv_reports/index.html` lists all of them.
 
-Without a curated table, drop `--curated-calls` and give `--genes`. The summary then lists the raw caller calls
-vs IGV. Curated rows for samples outside the run are listed as not compared, and new samples without curated rows
-appear only under the raw calls.
+**Without a curated table**, remove the `--curated-calls` line and give the genes with `--genes`, either typed in
+the script:
+```
+  --genes KRAS,BRAF,PTEN
+```
+or from a text file, e.g. `genes.txt` with one name per line:
+```
+KRAS
+BRAF
+PTEN
+```
+and `--genes genes.txt` in the script. The page then compares each raw caller call with IGV instead of curated
+calls. With neither a curated table nor `--genes`, the run stops and asks for genes.
+
+**Which genes are checked**, in order:
+1. `--regions genes.bed`, if given (your own coordinates).
+2. `--genes`, if given. Curated rows for other genes are left out of that run.
+3. Otherwise, the genes in the curated table.
+
+**When the curated table and the samples don't line up**:
+- New samples with no curated rows are still checked; they appear only under the raw calls.
+- Curated rows for samples that aren't in this run are listed as "not compared".
 
 ### The modes
 
