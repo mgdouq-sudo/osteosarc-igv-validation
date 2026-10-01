@@ -161,8 +161,10 @@ Claude asks for anything missing (file locations, the reference, tumor-only or p
 ### Without Claude Code
 
 Inputs: an indexed tumor BAM (and optionally the normal), the reference FASTA the BAMs were aligned to, the
-callers' outputs (VCF for SNVs/indels/SVs, a segment file for copy number), a BED of your genes, and
-optionally a curated table (`sample, gene, alteration`) and a GENCODE GTF for the gene track.
+callers' outputs (VCF for SNVs/indels/SVs, a segment file for copy number), a GENCODE GTF (gene positions and
+the gene track) and optionally a curated table (`sample, gene, alteration`). The genes to check are the curated
+table's by default, or `--genes A,B` (or `--regions genes.bed`); unknown gene names or mistyped sample names stop
+the run with a suggestion.
 
 ```bash
 git clone -b feat/igv-validator https://github.com/mgdouq-sudo/ClawBio.git && cd ClawBio && pip install -e .
@@ -172,8 +174,8 @@ $V --demo --output /tmp/igv_demo                                   # try it: syn
 
 # a whole run in one command: list your samples once (sample, tumor, normal, snv_vcf, sv_vcf, cnv, ...),
 # and each run goes into a new dated folder, igv_reports/<date_time>/, with its summary.html; nothing is overwritten
-$V --samplesheet samples.csv --regions my_genes.bed --reference hg38.fa \
-   --curated-calls curated.csv --annotation gencode.v44.basic.annotation.gtf.gz
+$V --samplesheet samples.csv --reference hg38.fa \
+   --curated-calls curated.csv --annotation gencode.v44.basic.annotation.gtf.gz   # [--genes KRAS,BRAF]
 # -> igv_reports/2026-10-20_14-32/summary.html (this run) and igv_reports/index.html (all runs)
 ```
 
