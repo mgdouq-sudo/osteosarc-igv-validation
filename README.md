@@ -221,6 +221,11 @@ python ClawBio/skills/igv-validator/igv_validator.py \
 holds `igv_validation_full.zip` (the whole report, to share), `genes.bed` (the coordinates used), `run_log.tsv`
 and a copy of `samples.csv`.
 
+On the summary, each row gives what IGV shows in one plain sentence (numbers under *details*), a thumbnail, and
+links: *report* opens that check's report showing only that gene (*show all genes* brings back the rest),
+*overview* the gene image, *interactive* the zoomable view. The top table compares your curated calls; the folded
+*Raw calls vs IGV* lists every caller call before filtering, for background.
+
 **Next run, other samples or genes: edit and run.**
 1. **Samples**: edit `samples.csv` (add or remove rows), or make a new file, e.g. `samples_batch2.csv`, and point
    the script's `--samplesheet` line at it.
