@@ -196,6 +196,10 @@ for s in S1 S2; do
 done
 ```
 `sample` must match the curated table's sample names exactly.
+`snv_list` (a table with chrom and pos columns) = **the filtered SNVs your curated table was made from**. Fill it
+in when you compare with curated calls. Without it, every caller SNV in the genes is checked: in tumor-only data
+these are mostly inherited, so the run warns, and they are listed under *details* without counting against a
+curated call.
 
 **3. Keep the command in a script** next to `samples.csv` (it starts in its own folder, so anyone can run a copy):
 ```bash
