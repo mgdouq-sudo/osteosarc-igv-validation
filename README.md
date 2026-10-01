@@ -203,18 +203,24 @@ read counts; one missing from the VCF is not checked. Fill it in when you compar
 these are mostly inherited, so the run warns, and they are listed under *details* without counting against a
 curated call.
 
-**3. Keep the command in a script** next to `samples.csv` (it starts in its own folder, so anyone can run a copy):
+**3. Save the command as a script, once**, next to `samples.csv`. This one block writes it and shows the end
+(replace the paths with yours; on an HPC, add your `module load` lines, e.g. `module load igv`, above `python`):
 ```bash
+cat > run_igv_validation.sh <<'EOF'
 #!/bin/bash
 # IGV validation: each run = one new dated folder in igv_reports/ (never overwrites)
+# extra options pass through, e.g.: bash run_igv_validation.sh --genes KRAS,BRAF
 cd "$(dirname "$0")"
 python ClawBio/skills/igv-validator/igv_validator.py \
   --samplesheet samples.csv \
   --reference /path/to/hg38.fa \
   --curated-calls curated.csv \
   --annotation gencode.v44.basic.annotation.gtf.gz \
-  "$@"    # extra options pass through: bash run_igv_validation.sh --genes KRAS,BRAF
+  "$@"
+EOF
+tail -3 run_igv_validation.sh      # the last line should be "$@"
 ```
+The script starts in its own folder, so anyone can run a copy. You do not edit it again to change genes (below).
 
 **4. Run** `bash run_igv_validation.sh` and open what it prints:
 `igv_reports/<date_time>/summary.html` (this run) and `igv_reports/index.html` (every run). The run folder also
