@@ -212,8 +212,8 @@ python ClawBio/skills/igv-validator/igv_validator.py \
   --samplesheet samples.csv \
   --reference /path/to/hg38.fa \
   --curated-calls curated.csv \
-  --annotation gencode.v44.basic.annotation.gtf.gz
-  # to check fewer genes, end the line above with \ and add:  --genes KRAS,BRAF
+  --annotation gencode.v44.basic.annotation.gtf.gz \
+  "$@"    # extra options pass through: bash run_igv_validation.sh --genes KRAS,BRAF
 ```
 
 **4. Run** `bash run_igv_validation.sh` and open what it prints:
