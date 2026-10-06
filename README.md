@@ -71,9 +71,10 @@ summary of the flags and not a verdict.
 ### The summary page
 
 `skill_results/summary.html` lists the 11 candidates (as `curated_calls.csv`) against the reads: what the
-call was, what IGV shows in one sentence, whether they agree, a thumbnail of the gene with the call marked, and
-links to the full report, the overview image and the interactive view. Flagged calls come first, with the
-reason in plain words.
+call was, what IGV shows in one sentence, where to start (*Look first* / *Consistent so far*, never a verdict), a
+thumbnail of the gene with the call marked, and
+links to the full report, the overview image and the interactive view. *Look first* rows come first, with the
+reason in plain words; every row, consistent or not, is meant to be checked on its image.
 
 ![Summary page](docs/summary_page.png)
 

@@ -1,7 +1,7 @@
 {
   "skill": "igv-validator",
   "version": "0.1.0",
-  "completed_at": "2026-09-30T19:38:40.194059+00:00",
+  "completed_at": "2026-10-06T16:54:48.168248+00:00",
   "input_checksum": "sha256:5305d20c00d8595bb304239d35a64175131c05df927d6a4364942f5bd6c1fa94",
   "datasets": {},
   "summary": {
@@ -399,7 +399,8 @@
       "tumor": "bams_wide/T1_tumor.bam",
       "normal": "bams_wide/T1_blood.bam",
       "reference": "reference/Homo_sapiens_assembly38.fasta",
-      "igv": "/Applications/IGV_2.19.7.app"
+      "igv": "/Applications/IGV_2.19.7.app",
+      "variants_list": true
     }
   }
 }

@@ -19,3 +19,4 @@ skill_results/*.log
 skill_results/reference
 # the summary's zipped copy of the whole report (re-made by every run)
 skill_results/*.zip
+skill_results/summary_settings.json
