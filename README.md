@@ -235,7 +235,9 @@ bash run_igv_validation.sh --genes KRAS,BRAF,PTEN
 - `bash run_igv_validation.sh --genes ...` checks only the genes you list (curated rows for other genes are left
   out of that run). The script itself does not change.
 
-On the summary, each row gives what IGV shows in one plain sentence (numbers under *details*), a thumbnail, and
+On the summary, each row gives what IGV shows in one plain sentence (numbers under *details*), where to
+start (*Look first* where the reads and the call differ, *Consistent so far* where they fit; neither is a verdict,
+so open the image either way), a thumbnail, and
 links: *report* opens that check's report showing only that gene (*show all genes* brings back the rest),
 *overview* the gene image, *interactive* the zoomable view. The top table compares your curated calls; the folded
 *Raw calls vs IGV* lists every caller call before filtering, for background.
