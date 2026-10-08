@@ -204,6 +204,7 @@ variants inside the genes are checked. Each listed variant must also be in `snv_
 read counts; one missing from the VCF is not checked. Fill it in when you compare with curated calls. Without it, every caller SNV in the genes is checked: in tumor-only data
 these are mostly inherited, so the run warns, and they are listed under *details* without counting against a
 curated call.
+**The same goes for `sv_vcf` and `cnv`: use the files your curated table was made from.** A pipeline often writes several SV VCFs (raw, merged, repeat-filtered, size-filtered, final); if the table came from an annotated version (e.g. AnnotSV output), give the VCF that annotation was run on. A different file checks other calls, and a curated SV missing from it shows as *Look first* for the wrong reason. To find it, match a few positions from your table against each candidate VCF.
 
 **3. Save the command as a script, once**, next to `samples.csv`. This one block writes it and shows the end
 (replace the paths with yours; on an HPC, add your `module load` lines, e.g. `module load igv`, above `python`):
