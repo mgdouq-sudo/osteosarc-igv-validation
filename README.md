@@ -20,8 +20,9 @@ callers (and your curated table) say, so disagreements stand out: single-strand 
 normal already carries another allele, too few reads, copy-number calls the read depth does not show, and
 calls caused by how the reads were aligned (see [Why alignment settings matter](#why-alignment-settings-matter)).
 
-**What it isn't:** a variant caller or an automatic truth. Copy number from read depth is a simple measure,
-tumor-only data cannot separate inherited from somatic variants, and every verdict is a first pass. The
+**What it isn't:** a variant caller or an automatic truth. Copy number from read depth is a simple measure (and
+for genes under 1 kb it rests on few reads, which the review notes point out), tumor-only data cannot separate
+inherited from somatic variants, and every label is only a first pass. The
 screenshots and interactive views are the evidence: judge each result there before reporting it.
 
 ## Data
