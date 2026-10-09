@@ -241,7 +241,8 @@ bash run_igv_validation.sh --genes KRAS,BRAF,PTEN
 On the summary, each row gives what IGV shows in one plain sentence (numbers under *details*), where to
 start (*Look first* where the reads and the call differ, *Consistent so far* where they fit; neither is a verdict,
 so open the image either way), a thumbnail, and
-links: *report* opens that check's report showing only that gene (*show all genes* brings back the rest),
+links: *report* opens the copy-number report (or the only report) showing only that gene, with tabs to the sample's
+other reports (CNV · SNV · SV) on the same gene (*show all genes* brings back the rest),
 *overview* the gene image, *interactive* the zoomable view. The top table compares your curated calls; the folded
 *Raw calls vs IGV* lists every caller call before filtering, for background.
 
