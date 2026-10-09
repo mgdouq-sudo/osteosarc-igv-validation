@@ -1,6 +1,6 @@
 id	gene	kind	variant	filter	sample	depth	alt	vaf_pct	alt_fwd	alt_rev	alt_near_read_end	alt_mean_mapq	split	discordant	caller_alt	caller_depth	flags	status
-C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_tumor	84	18	21.4					12	6				supported
-C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_blood	62	0	0.0					0	0				supported
+C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_tumor	91	18	19.8					12	6				supported
+C4_2	CDKN2B-PARD3B	bnd	chr2:205,310,103 <-> chr9:22,007,648 breakend	PASS	T1_blood	65	0	0.0					0	0				supported
 C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_tumor	85	29	34.1	8	21	0	60						supported
 C8	MAP2	deletion	chr2:209,694,772 28 bp deletion	PASS	T1_blood	70	0	0.0	0	0	0							supported
 C3	ROBO2	snv	chr3:77,607,853 C>A	PASS	T1_tumor	124	13	10.5	5	8	1	60						supported

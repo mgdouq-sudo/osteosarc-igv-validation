@@ -1,7 +1,7 @@
 # IGV Validator Report
 
 **Input**: `candidates.vcf` (2 variant(s) checked) · tumor: T0_tumor · normal: T0_blood
-**Date**: 2026-10-08  
+**Date**: 2026-10-09  
 **Skill**: igv-validator 0.1.0
 
 **1 supported, 1 flagged, 0 insufficient**.

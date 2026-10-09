@@ -1,7 +1,7 @@
 {
   "skill": "igv-validator",
   "version": "0.1.0",
-  "completed_at": "2026-10-08T00:51:56.746985+00:00",
+  "completed_at": "2026-10-09T02:34:47.884638+00:00",
   "input_checksum": "sha256:5305d20c00d8595bb304239d35a64175131c05df927d6a4364942f5bd6c1fa94",
   "datasets": {},
   "summary": {
@@ -33,9 +33,9 @@
         "pos2": 22007648,
         "label": "chr2:205,310,103 <-> chr9:22,007,648 breakend",
         "tumor": {
-          "depth": 84,
+          "depth": 91,
           "alt": 18,
-          "vaf_pct": 21.4,
+          "vaf_pct": 19.8,
           "split": 12,
           "discordant": 6,
           "alt_fwd": null,
@@ -45,7 +45,7 @@
           "other_allele_pct": null
         },
         "normal": {
-          "depth": 62,
+          "depth": 65,
           "alt": 0,
           "vaf_pct": 0.0,
           "split": 0,

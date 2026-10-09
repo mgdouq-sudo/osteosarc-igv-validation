@@ -1,7 +1,7 @@
 sample	gene	type	tool	caller_called	igv_shows	igv_agrees	review	why	location	caller_counts	flags	report
 T0_tumor	USH2A	SNV/indel	candidates.vcf	SNV/indel chr1:215,650,752 C>A	15 of 40 reads carry A (37.5%)	yes	low priority	the reads support the call	chr1:215650752			T0/report.html
 T0_tumor	ODF1	SNV/indel	candidates.vcf	SNV/indel chr8:102,560,579 G>T	5 of 52 reads carry T (9.6%)	no	check first: IGV does not agree; all supporting reads on one strand	all supporting reads on one strand (artifact pattern)	chr8:102560579		strand_bias	T0/report.html
-T1_tumor	CDKN2B-PARD3B	SV	candidates.vcf	SV chr2:205,310,103 <-> chr9:22,007,648 breakend	18 reads support the rearrangement (12 split, 6 discordant pairs, counted at both breakends); 84 reads cover the first breakend	yes	low priority	the reads support the call	chr2:205310103			T1/report.html
+T1_tumor	CDKN2B-PARD3B	SV	candidates.vcf	SV chr2:205,310,103 <-> chr9:22,007,648 breakend	18 DNA fragments support the rearrangement (12 split reads, 6 discordant pairs, counted at both breakends); 91 DNA fragments (read pairs) at the first breakend	yes	low priority	the reads support the call	chr2:205310103			T1/report.html
 T1_tumor	MAP2	SNV/indel	candidates.vcf	SNV/indel chr2:209,694,772 28 bp deletion	29 of 85 reads carry the deletion (34.1%)	yes	low priority	the reads support the call	chr2:209694772			T1/report.html
 T1_tumor	ROBO2	SNV/indel	candidates.vcf	SNV/indel chr3:77,607,853 C>A	13 of 124 reads carry A (10.5%)	yes	low priority	the reads support the call	chr3:77607853			T1/report.html
 T1_tumor	H1-2	SNV/indel	candidates.vcf	SNV/indel chr6:26,055,824 15 bp deletion	9 of 108 reads carry the deletion (8.3%)	yes	low priority	the reads support the call	chr6:26055824			T1/report.html

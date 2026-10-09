@@ -1,7 +1,7 @@
 # IGV Validator Report
 
 **Input**: `candidates.vcf` (8 variant(s) checked) · tumor: T1_tumor · normal: T1_blood
-**Date**: 2026-10-08  
+**Date**: 2026-10-09  
 **Skill**: igv-validator 0.1.0
 
 **6 supported, 1 flagged, 1 insufficient**.
@@ -14,7 +14,7 @@ Read counts come from the BAMs (MAPQ >= 20, base quality >= 20, duplicate/second
 
 | ID | Gene | Variant | Tumor support | Normal support | Caller reported (VCF) | Flags | Status |
 |---|---|---|---|---|---|---|---|
-| C4_2 | CDKN2B-PARD3B | chr2:205,310,103 <-> chr9:22,007,648 breakend | 18 (12 split, 6 pairs) / 84 | 0 (0 split, 0 pairs) / 62 | - | none | **supported** |
+| C4_2 | CDKN2B-PARD3B | chr2:205,310,103 <-> chr9:22,007,648 breakend | 18 (12 split, 6 pairs) / 91 fragments | 0 (0 split, 0 pairs) / 65 fragments | - | none | **supported** |
 | C8 | MAP2 | chr2:209,694,772 28 bp deletion | 29/85 (34.1%) | 0/70 (0.0%) | - | none | **supported** |
 | C3 | ROBO2 | chr3:77,607,853 C>A | 13/124 (10.5%) | 0/50 (0.0%) | - | none | **supported** |
 | C1 | H1-2 | chr6:26,055,824 15 bp deletion | 9/108 (8.3%) | 0/57 (0.0%) | - | none | **supported** |
@@ -40,8 +40,8 @@ Read counts come from the BAMs (MAPQ >= 20, base quality >= 20, duplicate/second
 
 ### C4_2 CDKN2B-PARD3B: supported
 
-- T1_tumor: 18 (12 split, 6 pairs) / 84
-- T1_blood: 0 (0 split, 0 pairs) / 62
+- T1_tumor: 18 (12 split, 6 pairs) / 91 fragments
+- T1_blood: 0 (0 split, 0 pairs) / 65 fragments
 - Caller reported (VCF): -
 - Flags: none
 
