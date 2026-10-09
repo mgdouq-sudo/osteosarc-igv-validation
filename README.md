@@ -243,7 +243,8 @@ start (*Look first* where the reads and the call differ, *Consistent so far* whe
 so open the image either way), a thumbnail, and
 links: *report* opens the copy-number report (or the only report) showing only that gene, with tabs to the sample's
 other reports (CNV · SNV · SV) on the same gene (*show all genes* brings back the rest),
-*overview* the gene image, *interactive* the zoomable view. The top table compares your curated calls; the folded
+*overview* the gene image, *interactive* the zoomable view (gene track labelled gene name + transcript, e.g.
+`KRAS_ENST00000256078.10`). The top table compares your curated calls; the folded
 *Raw calls vs IGV* lists every caller call before filtering, for background.
 
 **Next run, other samples or genes: edit and run.**
